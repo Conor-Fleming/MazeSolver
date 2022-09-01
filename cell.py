@@ -29,3 +29,6 @@ class Cell:
         if self.has_bottom_wall:
             border = Line(Point(x1, y2), Point(x2, y2))
             self.window.draw_line(border, "black")
+
+    def draw_move(self, to_cell, undo = False):
+        
