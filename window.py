@@ -5,26 +5,26 @@ from tkinter import Tk, BOTH, Canvas
 from turtle import width
 
 class Window:
-    def __init__(self, width, height) -> None:
+    def __init__(self, width, height):
         self.__root = Tk()
-        self.__root.title = "Root Window"
+        self.__root.title("Root Window")
+        self.__root.protocol("WM_DELETE_WINDOW", self.close)
         self.__canvas = Canvas(self.__root, bg = "white", height = height, width = width)
         self.__canvas.pack(fill = BOTH, expand = True)
         self.__running = False
-        self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
     def redraw(self):
         self.__root.update_idletasks()
         self.__root.update()
 
+    def wait_for_close(self):
+        self.__running = True
+        while self.__running:
+            self.redraw()
+    
     def draw_line(self, line, fill_color):
         line.draw(self.__canvas, fill_color)
 
-    def wait_for_close(self):
-        self.__running = True
-        while self.__running == True:
-            self.redraw()
-    
     def close(self):
         self.__running = False
 
@@ -59,7 +59,7 @@ class Cell:
             self.window.draw_line(border, "black")
 
 class Line:
-    def __init__(self, point1, point2) -> None:
+    def __init__(self, point1, point2):
         self.point1 = point1
         self.point2 = point2
 
@@ -68,6 +68,6 @@ class Line:
         canvas.pack(fill = BOTH, expand = True)
 
 class Point:
-    def __init__(self, x, y) -> None:
+    def __init__(self, x, y):
         self.x = x
         self.y = y
