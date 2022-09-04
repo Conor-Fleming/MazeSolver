@@ -31,4 +31,13 @@ class Cell:
             self.window.draw_line(border, "black")
 
     def draw_move(self, to_cell, undo = False):
+        startPoint = Point(self.x2 - self.x1, self.y2 - self.y1)
+        endPoint = Point(to_cell.x2 - to_cell.x1, to_cell.y2 - to_cell.y1)
+        path = Line(startPoint, endPoint)
+        if undo == False:
+            self.window.draw_line(path, "red")
+        if undo:
+            self.window.draw_line(path, "grey")
+
         
+
