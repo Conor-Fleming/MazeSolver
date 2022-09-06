@@ -31,13 +31,32 @@ class Cell:
             self.window.draw_line(border, "black")
 
     def draw_move(self, to_cell, undo = False):
-        startPoint = Point(self.x2 - self.x1, self.y2 - self.y1)
-        endPoint = Point(to_cell.x2 - to_cell.x1, to_cell.y2 - to_cell.y1)
-        path = Line(startPoint, endPoint)
-        if undo == False:
-            self.window.draw_line(path, "red")
-        if undo:
-            self.window.draw_line(path, "grey")
+        startX = (self.x2 + self.x1) / 2
+        startY = (self.y2 + self.y1) / 2
+        endX = (to_cell.x2 + to_cell.x1) / 2
+        endY = (to_cell.y2 + to_cell.y1) / 2
+        color = "red"
+        if not undo:
+            color = "grey"
+
+        move = Line(Point(startX, startY), Point(endX, endY))
+
+        self.window.draw_line(move, color)
+
+        #moving right
+        #if self.x1 < to_cell.x1:
+            #drawing two lines per move, one from mid point (startX, startY)
+         
+        #moving left 
+        #if self.x1 > to_cell.x1:
+
+       #moving down
+        #if self.y1 > to_cell.y1:
+
+        #moving up
+        #if self.y1 < to_cell.y1:
+
+     
 
         
 

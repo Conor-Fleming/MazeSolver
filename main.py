@@ -6,20 +6,14 @@ def main():
     
     cell = Cell(win)
     cell.has_right_wall = False
-    cell.has_top_wall = False
-    cell.draw(3, 3, 50, 50)
+    cell.draw(50, 50, 100, 100)
 
-    cell = Cell(win)
-    cell.has_right_wall = False
-    cell.has_left_wall = False
-    cell.has_bottom_wall = False
-    cell.draw(50, 5, 100, 50)
+    cell1 = Cell(win)
+    cell1.has_left_wall = False
+    cell1.has_bottom_wall = False
+    cell.draw(100, 50, 150, 100)
 
-    cell = Cell(win)
-    cell.has_left_wall = False
-    cell.draw(100, 5, 150, 50)
-    
-
+    cell1.draw_move(cell)
 
     win.wait_for_close()
 
