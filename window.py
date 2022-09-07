@@ -26,6 +26,7 @@ class Window:
         line.draw(self.__canvas, fill_color)
 
     def close(self):
+        print("closing window...")
         self.__running = False
 
 class Line:
