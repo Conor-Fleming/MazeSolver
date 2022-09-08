@@ -2,6 +2,7 @@ from window import Window, Line, Point
 
 class Cell:
     def __init__(self, window):
+        self.visited = False
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
