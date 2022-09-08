@@ -1,5 +1,6 @@
 from cell import Cell
 from window import Window, Line, Point 
+import time
 
 
 class Maze:
@@ -17,23 +18,25 @@ class Maze:
     def create_cells(self):
         self.cells = []
 
-        for col in self.columns:
+        for col in range(self.columns):
             column = []
-            for row in self.rows:
+            for row in range(self.rows):
                 column.append(Cell(self.window))
-            cells.append(column)
+            self.cells.append(column)
         
-        for i in cells:
-            for j in cells[i]:
-                j.draw_cell(i, j)
+        for i in range(self.columns):
+            for j in range(self.rows):
+                self.draw_cell(i, j)
+
         
     #calc x,y of cell with i, j and cell sizes     
     def draw_cell(self, i, j):
-        self.startX = i + self.x1
-        self.startY = j + self.y1
-        self.endX = startX + self.cell_size_x
-        self.endY = startY + self.cell_sixe_y
-        self.draw(self.startX, self.startY, self.endX, self.endY)
+        self.startX = self.x1 + i * self.cell_size_x
+        self.startY = self.y1 + j * self.cell_sixe_y
+        self.endX = self.startX + self.cell_size_x
+        self.endY = self.startY + self.cell_sixe_y
+        self.cells[i][j].draw(self.startX, self.startY, self.endX, self.endY)
+        self.animate()
         
     def animate(self):
         self.window.redraw()
