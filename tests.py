@@ -47,7 +47,7 @@ class Test_break_walls(unittest.TestCase):
         maze = Maze(0, 0, rows, cols, 10, 10)
         self.assertEqual(maze.cells[0][0].has_top_wall, False)
 
-    def test_entrance(self):
+    def test_exit(self):
         rows = 10
         cols = 10
         maze = Maze(0, 0, rows, cols, 10, 10)

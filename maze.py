@@ -4,7 +4,7 @@ import time
 
 
 class Maze:
-    def __init__(self, x1, y1, rows, columns, cell_size_x, cell_size_y, window = None):
+    def __init__(self, x1, y1, rows, columns, cell_size_x, cell_size_y, window):
         self.x1 = x1
         self.y1 = y1
         self.rows = rows
