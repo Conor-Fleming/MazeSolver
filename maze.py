@@ -13,11 +13,11 @@ class Maze:
         self.cell_sixe_y = cell_size_y
         self.window = window
         
-        
+        self.cells = []
         self.create_cells()
+        self.create_entrance_exit()
 
     def create_cells(self):
-        self.cells = []
         for col in range(self.columns):
             column = []
             for row in range(self.rows):
@@ -27,8 +27,16 @@ class Maze:
         for i in range(self.columns):
             for j in range(self.rows):
                 self.draw_cell(i, j)
-
         
+    def create_entrance_exit(self):
+        #entrance wall broken
+        self.cells[0][0].has_top_wall = False
+        self.draw_cell(0, 0)
+
+        #exit wall broken
+        self.cells[self.columns-1][self.rows-1].has_bottom_wall = False
+        self.draw_cell(self.columns-1, self.rows-1)
+
     #calc x,y of cell with i, j and cell sizes     
     def draw_cell(self, i, j):
         if self.window == None:

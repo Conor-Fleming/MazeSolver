@@ -36,8 +36,23 @@ class Test_create_cells(unittest.TestCase):
         self.assertEqual(len(maze3.cells), maze3.columns, "columns is not correct")
     
         self.assertEqual(len(maze3.cells[0]), maze3.rows, "rows are not correct")
-       
 
+class Test_break_walls(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def test_entrance(self):
+        rows = 10
+        cols = 10
+        maze = Maze(0, 0, rows, cols, 10, 10)
+        self.assertEqual(maze.cells[0][0].has_top_wall, False)
+
+    def test_entrance(self):
+        rows = 10
+        cols = 10
+        maze = Maze(0, 0, rows, cols, 10, 10)
+        self.assertEqual(maze.cells[cols-1][rows-1].has_bottom_wall, False)
+        
 
 if __name__ == "__main__":
     unittest.main() 
