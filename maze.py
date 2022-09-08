@@ -4,7 +4,7 @@ import time
 
 
 class Maze:
-    def __init__(self, x1, y1, rows, columns, cell_size_x, cell_size_y, window,):
+    def __init__(self, x1, y1, rows, columns, cell_size_x, cell_size_y, window = None):
         self.x1 = x1
         self.y1 = y1
         self.rows = rows
@@ -12,12 +12,12 @@ class Maze:
         self.cell_size_x = cell_size_x
         self.cell_sixe_y = cell_size_y
         self.window = window
-
+        
+        
         self.create_cells()
 
     def create_cells(self):
         self.cells = []
-
         for col in range(self.columns):
             column = []
             for row in range(self.rows):
@@ -31,6 +31,9 @@ class Maze:
         
     #calc x,y of cell with i, j and cell sizes     
     def draw_cell(self, i, j):
+        if self.window == None:
+            return
+        
         self.startX = self.x1 + i * self.cell_size_x
         self.startY = self.y1 + j * self.cell_sixe_y
         self.endX = self.startX + self.cell_size_x
