@@ -29,46 +29,54 @@ class Maze:
     def solve_maze(self, i, j):
         self.animate()
         self.cells[i][j].visited = True
-        if self.cells[i][j] == self.cells[self.rows-1][self.columns-1]:
+        if self.cells[i][j] == self.cells[self.columns-1][self.rows-1]:
             return True
 
         direction = [[i, j-1], [i, j+1], [i-1, j], [i+1, j]]
         
 
         #check each direction and visited status
-        for row, col in direction:
+        for col, row in direction:
             #move to the right
-            if col > i and col < self.columns - 1:
-                if self.cells[i][j].has_right_wall == False and self.cells[row][col].visited == False:
-                    self.cells[i][j].draw_move(self.cells[row][col])
-                    if self.solve_maze(row, col):
+            if col > i and col <= self.columns - 1:
+                if self.cells[col][row].has_left_wall == False and self.cells[col][row].visited == False:
+                    print("right ex")
+                    print(i,j,col,row)
+                    self.cells[i][j].draw_move(self.cells[col][row])
+                    if self.solve_maze(col, row):
                         return True
                     else:
-                        self.cells[i][j].draw_move(self.cells[row][col], True)
+                        self.cells[i][j].draw_move(self.cells[col][row], True)
             #move to the left
-            if col < i and col > 0:
-                if self.cells[i][j].has_right_wall == False and self.cells[row][col].visited == False:
-                    self.cells[i][j].draw_move(self.cells[row][col])
-                    if self.solve_maze(row, col):
+            if col < i and col >= 0:
+                if self.cells[col][row].has_right_wall == False and self.cells[col][row].visited == False:
+                    print("left ex")
+                    print(i,j,col,row)
+                    self.cells[i][j].draw_move(self.cells[col][row])
+                    if self.solve_maze(col, row):
                         return True
                     else:
-                        self.cells[i][j].draw_move(self.cells[row][col], True)
+                        self.cells[i][j].draw_move(self.cells[col][row], True)
             #move down
-            if row > j and row < self.rows - 1:
-                if self.cells[i][j].has_right_wall == False and self.cells[row][col].visited == False:
+            if row > j and row <= self.rows - 1:
+                if self.cells[col][row].has_top_wall == False and self.cells[col][row].visited == False:
+                    print("down ex")
+                    print(i,j,col,row)
                     self.cells[i][j].draw_move(self.cells[row][col])
-                    if self.solve_maze(row, col):
+                    if self.solve_maze(col, row):
                         return True
                     else:
                         self.cells[i][j].draw_move(self.cells[row][col], True)
             #move up
-            if row < j and row > 0:
-                if self.cells[i][j].has_right_wall == False and self.cells[row][col].visited == False:
-                    self.cells[i][j].draw_move(self.cells[row][col])
-                    if self.solve_maze(row, col):
+            if row < j and row >= 0:
+                if self.cells[col][row].has_bottom_wall == False and self.cells[col][row].visited == False:
+                    print("up ex")
+                    print(i,j,col,row)
+                    self.cells[i][j].draw_move(self.cells[col][row])
+                    if self.solve_maze(col, row):
                         return True
                     else:
-                        self.cells[i][j].draw_move(self.cells[row][col], True)
+                        self.cells[i][j].draw_move(self.cells[col][row], True)
         return False
 
     def create_cells(self):
