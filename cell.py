@@ -58,8 +58,8 @@ class Cell:
         endY = (to_cell.y2 + to_cell.y1) / 2
         
         color = "red"
-        if not undo:
-            color = "green"
+        if undo:
+            color = "grey"
 
         move = Line(Point(startX, startY), Point(endX, endY))
         self.window.draw_line(move, color)

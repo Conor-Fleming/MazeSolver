@@ -33,41 +33,42 @@ class Maze:
             return True
 
         direction = [[i, j-1], [i, j+1], [i-1, j], [i+1, j]]
-        cur = self.cells[i][j]
+        
 
         #check each direction and visited status
         for row, col in direction:
-            if row > 0 and row <= self.columns - 1 and col > 0 and col >= self.rows -1:
-                next_cell = self.cells[row][col]
-                #move to the right
-                if col > i:
-                    if cur.has_right_wall == False and self.cells[row][col].visited == False:
-                        self.cur.draw_move(next_cell)
-                        if self.solve_maze(row, col):
-                            return True
-                        self.cur.draw_move(next_cell, True)
-                #move to the left
-                if col < i:
-                    if cur.has_right_wall == False and self.cells[row][col].visited == False:
-                        self.cur.draw_move(next_cell)
-                        if self.solve_maze(row, col):
-                            return True
-                        self.cur.draw_move(next_cell, True)
-                #move down
-                if row > j:
-                    if cur.has_right_wall == False and self.cells[row][col].visited == False:
-                        self.cur.draw_move(next_cell)
-                        if self.solve_maze(row, col):
-                            return True
-                        self.cur.draw_move(next_cell, True)
-                #move up
-                if row < j:
-                    if cur.has_right_wall == False and self.cells[row][col].visited == False:
-                        self.cur.draw_move(next_cell)
-                        if self.solve_maze(row, col):
-                            return True
-                        self.cur.draw_move(next_cell, True)
-                
+            #move to the right
+            if col > i and col < self.columns - 1:
+                if self.cells[i][j].has_right_wall == False and self.cells[row][col].visited == False:
+                    self.cells[i][j].draw_move(self.cells[row][col])
+                    if self.solve_maze(row, col):
+                        return True
+                    else:
+                        self.cells[i][j].draw_move(self.cells[row][col], True)
+            #move to the left
+            if col < i and col > 0:
+                if self.cells[i][j].has_right_wall == False and self.cells[row][col].visited == False:
+                    self.cells[i][j].draw_move(self.cells[row][col])
+                    if self.solve_maze(row, col):
+                        return True
+                    else:
+                        self.cells[i][j].draw_move(self.cells[row][col], True)
+            #move down
+            if row > j and row < self.rows - 1:
+                if self.cells[i][j].has_right_wall == False and self.cells[row][col].visited == False:
+                    self.cells[i][j].draw_move(self.cells[row][col])
+                    if self.solve_maze(row, col):
+                        return True
+                    else:
+                        self.cells[i][j].draw_move(self.cells[row][col], True)
+            #move up
+            if row < j and row > 0:
+                if self.cells[i][j].has_right_wall == False and self.cells[row][col].visited == False:
+                    self.cells[i][j].draw_move(self.cells[row][col])
+                    if self.solve_maze(row, col):
+                        return True
+                    else:
+                        self.cells[i][j].draw_move(self.cells[row][col], True)
         return False
 
     def create_cells(self):
@@ -124,7 +125,6 @@ class Maze:
                 return
 
             direction = random.randrange(0, len(to_visit))
-           
             #looking to see the direction we are moving based on i, j coordinates
             # removing walls and recursively calling create_maze() method  
             if to_visit[direction][1] < j:
