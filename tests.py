@@ -1,4 +1,5 @@
 import unittest
+import sys
 from maze import Maze
 
 
@@ -52,7 +53,23 @@ class Test_break_walls(unittest.TestCase):
         cols = 10
         maze = Maze(0, 0, rows, cols, 10, 10)
         self.assertEqual(maze.cells[cols-1][rows-1].has_bottom_wall, False)
-        
+
+class Test_reset_visited(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    sys.setrecursionlimit(10000)
+
+    def test_visited(self):
+        maze = Maze(0, 0, 10, 10, 2, 2)
+        check = True
+        for i in range(maze.columns):
+            for j in range(maze.rows):
+                if maze.cells[i][j] == True:
+                    check = False
+                    return
+
+        self.assertTrue(check)        
 
 if __name__ == "__main__":
     unittest.main() 

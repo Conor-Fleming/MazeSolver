@@ -5,7 +5,7 @@ import random
 
 
 class Maze:
-    def __init__(self, x1, y1, rows, columns, cell_size_x, cell_size_y, window, seed = None):
+    def __init__(self, x1, y1, rows, columns, cell_size_x, cell_size_y, window= None, seed=None):
         self.x1 = x1
         self.y1 = y1
         self.rows = rows
@@ -20,6 +20,7 @@ class Maze:
         self.create_cells()
         self.create_entrance_exit()
         self.create_maze(0, 0)
+        self.reset_visited()
 
     def create_cells(self):
         for col in range(self.columns):
@@ -120,6 +121,11 @@ class Maze:
     def animate(self):
         self.window.redraw()
         time.sleep(.05)
+
+    def reset_visited(self):
+        for i in range(self.columns):
+            for j in range(self.rows):
+                self.cells[i][j].visited = False
 
 
 
