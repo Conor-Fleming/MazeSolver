@@ -21,6 +21,17 @@ class Maze:
         self.create_entrance_exit()
         self.create_maze(0, 0)
         self.reset_visited()
+    
+    def solve(self):
+        return self.solve_maze(self)
+    
+    def solve_maze(self, i, j):
+        self.animate()
+        self.cells[i][j].visited = True
+        if self.cells[i][j] == self.cells[self.rows][self.columns]:
+            return True
+
+        #check each direction and visited status
 
     def create_cells(self):
         for col in range(self.columns):
