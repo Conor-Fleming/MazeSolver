@@ -19,6 +19,7 @@ class Maze:
         self.cells = []
         self.create_cells()
         self.create_entrance_exit()
+        self.create_maze(0, 0)
 
     def create_cells(self):
         for col in range(self.columns):
@@ -45,45 +46,52 @@ class Maze:
 
         while self.cells[i][j] != None:
             #using dictionary to make it easier to see what way we are going
-            to_visit = {}
-            #adjacent cells -> top [i][j-1] / bottom [i][j+1] / left [i-1][j] / right [i+1][j]
-            self.top_cell = self.cells[i][j-1]
-            self.bottom_cell = self.cells[i][j+1]
-            self.left_cell = self.cells[i-1][j]
-            self.right_cell = self.cells[i+1][j]
+            to_visit = []
+            #adjacent cells -> top cells[i][j-1] / bottom cells[i][j+1] / left cells[i-1][j] / right cells[i+1][j]
 
-            if top_cell.visited == False:
-                to_visit["top"].append(top_cell)
+            if self.cells[i][j-1].visited == False:
+                coordinate = [i, j-1]
+                print(coordinate)
+                to_visit.append(coordinate)
 
-            if bottom_cell.visited == False:
-                to_visit["bottom"].append(bottom_cell)
+            if self.cells[i][j+1].visited == False:
+                coordinate = [i, j+1]
+                print(coordinate)
+                to_visit.append(coordinate)
 
-            if left_cell.visited == False:
-                to_visit["left"].append(left_cell)
+            if self.cells[i-1][j].visited == False:
+                coordinate = [i-1, j]
+                print(coordinate)
+                to_visit.append(coordinate)
 
-            if right_cell.visited == False:
-                to_visit["right"].append(right_cell)
+            if self.cells[i+1][j].visited == False:
+                coordinate = [i+1, j]
+                print(coordinate)
+                to_visit.append(coordinate)
             
             if not to_visit:
                 self.draw_cell(i, j)
                 return
+            
+            print(to_visit)
 
-            direction, cell = random.choice(list(to_visit.items()))
-            if direction == "up":
+            direction = random.randrange(0, len(to_visit))
+            print(direction)
+            if to_visit[direction][1] < j:
                 self.cells[i][j].has_top_wall = False
-                cell.has_bottom_wall = False
+                self.cells[i][j-1].has_bottom_wall = False
                 self.create_maze(i, j-1)
-            if direction == "bottom":
+            if to_visit[direction][1] > j:
                 self.cells[i][j].has_bottom_wall = False
-                cell.has_top_wall = False
+                self.cells[i][j+1].has_top_wall = False
                 self.create_maze(i, j+1)
-            if direction == "left":
+            if to_visit[direction][0] < i:
                 self.cells[i][j].has_left_wall = False
-                cell.has_right_wall = False
+                self.cells[i-1][j].has_right_wall = False
                 self.create_maze(i-1, j)
-            if direction == "right":
+            if to_visit[direction][0] > i:
                 self.cells[i][j].has_right_wall = False
-                cell.has_left_wall = False
+                self.cells[i+1][j].has_left_wall = False
                 self.create_maze(i+1, j)
 
 
