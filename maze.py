@@ -45,50 +45,60 @@ class Maze:
         self.cells[i][j].visited = True
 
         while self.cells[i][j] != None:
-            #using dictionary to make it easier to see what way we are going
+            #list to store potential next cells coordinates
             to_visit = []
-            #adjacent cells -> top cells[i][j-1] / bottom cells[i][j+1] / left cells[i-1][j] / right cells[i+1][j]
-
-            if self.cells[i][j-1].visited == False:
-                coordinate = [i, j-1]
-                print(coordinate)
-                to_visit.append(coordinate)
-
-            if self.cells[i][j+1].visited == False:
-                coordinate = [i, j+1]
-                print(coordinate)
-                to_visit.append(coordinate)
-
-            if self.cells[i-1][j].visited == False:
-                coordinate = [i-1, j]
-                print(coordinate)
-                to_visit.append(coordinate)
-
-            if self.cells[i+1][j].visited == False:
-                coordinate = [i+1, j]
-                print(coordinate)
-                to_visit.append(coordinate)
             
+            #adjacent cells -> top cells[i][j-1] / bottom cells[i][j+1] / left cells[i-1][j] / right cells[i+1][j]
+            #adding nested ifs to keep index in range, will look into a better way to do this but for now this seems to work
+            if j -1 >= 0:
+                if self.cells[i][j-1].visited == False:
+                    coordinate = [i, j-1]
+                    to_visit.append(coordinate)
+
+            if j + 1 <= self.rows - 1:
+                if self.cells[i][j+1].visited == False:
+                    coordinate = [i, j+1]
+                    to_visit.append(coordinate)
+
+            if i - 1 >= 0:
+                if self.cells[i-1][j].visited == False:
+                    coordinate = [i-1, j]
+                    to_visit.append(coordinate)
+
+            if i + 1 <= self.columns - 1:
+                if self.cells[i+1][j].visited == False:
+                    coordinate = [i+1, j]
+                    to_visit.append(coordinate)
+                
             if not to_visit:
                 self.draw_cell(i, j)
                 return
-            
-            print(to_visit)
 
             direction = random.randrange(0, len(to_visit))
-            print(direction)
+           
+            #looking to see the direction we are moving based on i, j coordinates
+            # removing walls and recursively calling create_maze() method  
             if to_visit[direction][1] < j:
                 self.cells[i][j].has_top_wall = False
                 self.cells[i][j-1].has_bottom_wall = False
                 self.create_maze(i, j-1)
+
+            #looking to see the direction we are moving based on i, j coordinates
+            # removing walls and recursively calling create_maze() method  
             if to_visit[direction][1] > j:
                 self.cells[i][j].has_bottom_wall = False
                 self.cells[i][j+1].has_top_wall = False
                 self.create_maze(i, j+1)
+
+            #looking to see the direction we are moving based on i, j coordinates
+            # removing walls and recursively calling create_maze() method  
             if to_visit[direction][0] < i:
                 self.cells[i][j].has_left_wall = False
                 self.cells[i-1][j].has_right_wall = False
                 self.create_maze(i-1, j)
+
+            #looking to see the direction we are moving based on i, j coordinates
+            # removing walls and recursively calling create_maze() method    
             if to_visit[direction][0] > i:
                 self.cells[i][j].has_right_wall = False
                 self.cells[i+1][j].has_left_wall = False
