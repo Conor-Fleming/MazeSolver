@@ -5,7 +5,8 @@ import random
 
 
 class Maze:
-    def __init__(self, x1, y1, rows, columns, cell_size_x, cell_size_y, window, seed=None):
+    #constructor
+    def __init__(self, x1, y1, columns, rows, cell_size_x, cell_size_y, window, seed=None):
         self.x1 = x1
         self.y1 = y1
         self.rows = rows
@@ -67,6 +68,7 @@ class Maze:
         return False
 
     def create_cells(self):
+        #looping through number of specified rows and columns and creating cells to be addded to cells[][] matric
         for col in range(self.columns):
             column = []
             for row in range(self.rows):
@@ -161,10 +163,12 @@ class Maze:
         self.cells[i][j].draw(self.startX, self.startY, self.endX, self.endY)
         self.animate()
         
+    #sleeping before each redraw call as to slow down the visuals so a human can follow
     def animate(self):
         self.window.redraw()
         time.sleep(.05)
 
+    #resetting visited property after creating maze so we can reference visited when solving
     def reset_visited(self):
         for i in range(self.columns):
             for j in range(self.rows):
