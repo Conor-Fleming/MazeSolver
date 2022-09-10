@@ -51,7 +51,7 @@ class Cell:
     def draw_move(self, to_cell, undo = False):
         if self.window == None:
             return
-        
+         
         startX = (self.x2 + self.x1) / 2
         startY = (self.y2 + self.y1) / 2
         endX = (to_cell.x2 + to_cell.x1) / 2
