@@ -1,6 +1,8 @@
 # MazeSolver
 
-A maze solving application.
+https://user-images.githubusercontent.com/32988273/189467930-4fe925ef-6976-453d-a30e-528bb2a062c6.mov
+
+A Maze-Solving application built with Python.
 
 ## Usage
 To run Maze Solver locally (_assuming user is on Mac or Linux machine_)
