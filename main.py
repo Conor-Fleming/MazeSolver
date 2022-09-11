@@ -9,13 +9,16 @@ def main():
     #creating maze object, you can tweak settings of maze with these parameters
     #space between top of window and top of grid
     x_Padding = 5
+    
     #space between left of window and left of grid
     y_Padding = 5
     columns = 10
     rows = 10
+
     #x, y size of cells
     cell_x = 50
     cell_y = 50
+
     maze = Maze(x_Padding, y_Padding, rows, columns, cell_x, cell_y, win)
 
     #solving the created maze
