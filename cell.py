@@ -63,10 +63,4 @@ class Cell:
 
         move = Line(Point(startX, startY), Point(endX, endY))
         self.window.draw_line(move, color)
-
         
-
-     
-
-        
-
